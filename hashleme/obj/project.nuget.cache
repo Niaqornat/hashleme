@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "tn8WuqiOZyg=",
+  "success": true,
+  "projectFilePath": "D:\\Kriptoloji\\hashleme\\hashleme\\hashleme.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\bebeb\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.14\\microsoft.netcore.app.ref.8.0.14.nupkg.sha512",
+    "C:\\Users\\bebeb\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.14\\microsoft.windowsdesktop.app.ref.8.0.14.nupkg.sha512",
+    "C:\\Users\\bebeb\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.14\\microsoft.aspnetcore.app.ref.8.0.14.nupkg.sha512",
+    "C:\\Users\\bebeb\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.14\\microsoft.netcore.app.host.win-x64.8.0.14.nupkg.sha512"
+  ],
+  "logs": []
+}

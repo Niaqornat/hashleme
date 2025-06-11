@@ -1,0 +1,37 @@
+@{
+    ViewBag.Title = "Batu Kriptoloji - Ana Sayfa";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="text-center">Batu Kriptoloji</h1>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-body text-center">
+                                    <h3>AES Şifreleme</h3>
+                                    <p>AES algoritması ile metin ve dosya şifreleme ve şifre çözme işlemleri yapabilirsiniz.</p>
+                                    <a href="@Url.Action("Index", "AES")" class="btn btn-primary">AES Şifreleme</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-body text-center">
+                                    <h3>SHA256 Özet</h3>
+                                    <p>SHA256 algoritması ile metin ve dosya için özet değeri oluşturabilir ve doğrulayabilirsiniz.</p>
+                                    <a href="@Url.Action("Index", "SHA256")" class="btn btn-success">SHA256 Özet</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

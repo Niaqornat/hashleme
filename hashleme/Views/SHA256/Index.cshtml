@@ -1,0 +1,263 @@
+@{
+    ViewBag.Title = "SHA256 Özet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">SHA256 Özet Fonksiyonu</h2>
+                </div>
+                <div class="card-body">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="text-hash-tab" data-bs-toggle="tab" data-bs-target="#text-hash" type="button" role="tab">Metin Özeti</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="text-verify-tab" data-bs-toggle="tab" data-bs-target="#text-verify" type="button" role="tab">Metin Özeti Doğrulama</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="file-hash-tab" data-bs-toggle="tab" data-bs-target="#file-hash" type="button" role="tab">Dosya Özeti</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="file-verify-tab" data-bs-toggle="tab" data-bs-target="#file-verify" type="button" role="tab">Dosya Özeti Doğrulama</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content p-3" id="myTabContent">
+                        <!-- Metin Özeti -->
+                        <div class="tab-pane fade show active" id="text-hash" role="tabpanel">
+                            <form id="text-hash-form">
+                                <div class="mb-3">
+                                    <label for="hash_text" class="form-label">Özeti Alınacak Metin</label>
+                                    <textarea class="form-control" id="hash_text" name="text" rows="5" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Özet Al</button>
+                            </form>
+                            <div id="text-hash-result" class="mt-4" style="display: none;">
+                                <div class="alert alert-success">
+                                    <h5>SHA256 Özet Sonucu</h5>
+                                    <div class="mb-3">
+                                        <label class="form-label">Özet Değeri (Hex)</label>
+                                        <input type="text" class="form-control" id="text-hash-value" readonly>
+                                        <button class="btn btn-sm btn-secondary mt-2" onclick="copyToClipboard('text-hash-value')">Kopyala</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Metin Özeti Doğrulama -->
+                        <div class="tab-pane fade" id="text-verify" role="tabpanel">
+                            <form id="text-verify-form">
+                                <div class="mb-3">
+                                    <label for="verify_text" class="form-label">Doğrulanacak Metin</label>
+                                    <textarea class="form-control" id="verify_text" name="text" rows="5" required></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="verify_hash" class="form-label">SHA256 Özet Değeri</label>
+                                    <input type="text" class="form-control" id="verify_hash" name="hash" required>
+                                </div>
+                                <button type="submit" class="btn btn-success">Doğrula</button>
+                            </form>
+                            <div id="text-verify-result" class="mt-4" style="display: none;">
+                                <div id="text-verify-success" class="alert alert-success" style="display: none;">
+                                    <h5>Doğrulama Başarılı</h5>
+                                    <p>Metin ve özet değeri eşleşiyor.</p>
+                                </div>
+                                <div id="text-verify-error" class="alert alert-danger" style="display: none;">
+                                    <h5>Doğrulama Başarısız</h5>
+                                    <p>Metin ve özet değeri eşleşmiyor!</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Dosya Özeti -->
+                        <div class="tab-pane fade" id="file-hash" role="tabpanel">
+                            <form id="file-hash-form" enctype="multipart/form-data">
+                                <div class="mb-3">
+                                    <label for="hash_file" class="form-label">Özeti Alınacak Dosya</label>
+                                    <input type="file" class="form-control" id="hash_file" name="file" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Dosya Özeti Al</button>
+                            </form>
+                            <div id="file-hash-result" class="mt-4" style="display: none;">
+                                <div class="alert alert-success">
+                                    <h5>Dosya SHA256 Özet Sonucu</h5>
+                                    <div class="mb-3">
+                                        <label class="form-label">Dosya Adı</label>
+                                        <input type="text" class="form-control" id="file-hash-filename" readonly>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Özet Değeri (Hex)</label>
+                                        <input type="text" class="form-control" id="file-hash-value" readonly>
+                                        <button class="btn btn-sm btn-secondary mt-2" onclick="copyToClipboard('file-hash-value')">Kopyala</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Dosya Özeti Doğrulama -->
+                        <div class="tab-pane fade" id="file-verify" role="tabpanel">
+                            <form id="file-verify-form" enctype="multipart/form-data">
+                                <div class="mb-3">
+                                    <label for="verify_file" class="form-label">Doğrulanacak Dosya</label>
+                                    <input type="file" class="form-control" id="verify_file" name="file" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="verify_file_hash" class="form-label">SHA256 Özet Değeri</label>
+                                    <input type="text" class="form-control" id="verify_file_hash" name="hash" required>
+                                </div>
+                                <button type="submit" class="btn btn-success">Doğrula</button>
+                            </form>
+                            <div id="file-verify-result" class="mt-4" style="display: none;">
+                                <div id="file-verify-success" class="alert alert-success" style="display: none;">
+                                    <h5>Doğrulama Başarılı</h5>
+                                    <p>Dosya ve özet değeri eşleşiyor.</p>
+                                </div>
+                                <div id="file-verify-error" class="alert alert-danger" style="display: none;">
+                                    <h5>Doğrulama Başarısız</h5>
+                                    <p>Dosya ve özet değeri eşleşmiyor!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Yardımcı fonksiyonlar
+        function showError(message) {
+            alert('Hata: ' + message);
+        }
+
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            element.select();
+            document.execCommand('copy');
+            alert('Kopyalandı!');
+        }
+
+        // Metin özeti alma formu
+        document.getElementById('text-hash-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            $.ajax({
+                url: '@Url.Action("HashText", "SHA256")',
+                type: 'POST',
+                data: {
+                    text: formData.get('text')
+                },
+                success: function (data) {
+                    if (data.success) {
+                        document.getElementById('text-hash-value').value = data.hash;
+                        document.getElementById('text-hash-result').style.display = 'block';
+                    } else {
+                        showError(data.error);
+                    }
+                },
+                error: function (error) {
+                    showError('İstek sırasında bir hata oluştu.');
+                }
+            });
+        });
+
+        // Metin özeti doğrulama formu
+        document.getElementById('text-verify-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            $.ajax({
+                url: '@Url.Action("VerifyText", "SHA256")',
+                type: 'POST',
+                data: {
+                    text: formData.get('text'),
+                    hash: formData.get('hash')
+                },
+                success: function (data) {
+                    if (data.success) {
+                        document.getElementById('text-verify-result').style.display = 'block';
+                        if (data.is_valid) {
+                            document.getElementById('text-verify-success').style.display = 'block';
+                            document.getElementById('text-verify-error').style.display = 'none';
+                        } else {
+                            document.getElementById('text-verify-success').style.display = 'none';
+                            document.getElementById('text-verify-error').style.display = 'block';
+                        }
+                    } else {
+                        showError(data.error);
+                    }
+                },
+                error: function (error) {
+                    showError('İstek sırasında bir hata oluştu.');
+                }
+            });
+        });
+
+        // Dosya özeti alma formu
+        document.getElementById('file-hash-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            $.ajax({
+                url: '@Url.Action("HashFile", "SHA256")',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    if (data.success) {
+                        document.getElementById('file-hash-filename').value = data.filename;
+                        document.getElementById('file-hash-value').value = data.hash;
+                        document.getElementById('file-hash-result').style.display = 'block';
+                    } else {
+                        showError(data.error);
+                    }
+                },
+                error: function (error) {
+                    showError('İstek sırasında bir hata oluştu.');
+                }
+            });
+        });
+
+        // Dosya özeti doğrulama formu
+        document.getElementById('file-verify-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            $.ajax({
+                url: '@Url.Action("VerifyFile", "SHA256")',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    if (data.success) {
+                        document.getElementById('file-verify-result').style.display = 'block';
+                        if (data.is_valid) {
+                            document.getElementById('file-verify-success').style.display = 'block';
+                            document.getElementById('file-verify-error').style.display = 'none';
+                        } else {
+                            document.getElementById('file-verify-success').style.display = 'none';
+                            document.getElementById('file-verify-error').style.display = 'block';
+                        }
+                    } else {
+                        showError(data.error);
+                    }
+                },
+                error: function (error) {
+                    showError('İstek sırasında bir hata oluştu.');
+                }
+            });
+        });
+    </script>
+}

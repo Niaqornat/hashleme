@@ -1,0 +1,141 @@
+@{
+    ViewBag.Title = "AES Şifreleme";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">AES Şifreleme ve Şifre Çözme</h2>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h3>Metin Şifreleme</h3>
+                                </div>
+                                <div class="card-body">
+                                    <form id="encryptForm">
+                                        <div class="form-group">
+                                            <label for="encryptText">Şifrelenecek Metin:</label>
+                                            <textarea class="form-control" id="encryptText" rows="4" required></textarea>
+                                        </div>
+                                        <div class="form-group mt-3">
+                                            <label for="encryptKey">Anahtar (Opsiyonel):</label>
+                                            <input type="text" class="form-control" id="encryptKey">
+                                            <small class="form-text text-muted">Boş bırakırsanız rastgele bir anahtar oluşturulacaktır.</small>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary mt-3">Şifrele</button>
+                                    </form>
+                                    <div id="encryptResult" class="mt-3" style="display: none;">
+                                        <h4>Sonuç:</h4>
+                                        <div class="form-group">
+                                            <label>Şifreli Metin:</label>
+                                            <textarea class="form-control" id="encryptedText" rows="4" readonly></textarea>
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <label>IV:</label>
+                                            <input type="text" class="form-control" id="encryptedIV" readonly>
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <label>Anahtar:</label>
+                                            <input type="text" class="form-control" id="encryptedKey" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h3>Metin Şifre Çözme</h3>
+                                </div>
+                                <div class="card-body">
+                                    <form id="decryptForm">
+                                        <div class="form-group">
+                                            <label for="decryptText">Şifreli Metin:</label>
+                                            <textarea class="form-control" id="decryptText" rows="4" required></textarea>
+                                        </div>
+                                        <div class="form-group mt-3">
+                                            <label for="decryptIV">IV:</label>
+                                            <input type="text" class="form-control" id="decryptIV" required>
+                                        </div>
+                                        <div class="form-group mt-3">
+                                            <label for="decryptKey">Anahtar:</label>
+                                            <input type="text" class="form-control" id="decryptKey" required>
+                                        </div>
+                                        <button type="submit" class="btn btn-success mt-3">Şifre Çöz</button>
+                                    </form>
+                                    <div id="decryptResult" class="mt-3" style="display: none;">
+                                        <h4>Sonuç:</h4>
+                                        <div class="form-group">
+                                            <label>Çözülmüş Metin:</label>
+                                            <textarea class="form-control" id="decryptedText" rows="4" readonly></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#encryptForm').submit(function (e) {
+                e.preventDefault();
+                var text = $('#encryptText').val();
+                var key = $('#encryptKey').val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("Encrypt", "AES")',
+                    data: { text: text, key: key },
+                    success: function (response) {
+                        if (response.success) {
+                            $('#encryptedText').val(response.encryptedText);
+                            $('#encryptedIV').val(response.iv);
+                            $('#encryptedKey').val(response.key);
+                            $('#encryptResult').show();
+                        } else {
+                            alert('Hata: ' + response.message);
+                        }
+                    },
+                    error: function () {
+                        alert('Bir hata oluştu.');
+                    }
+                });
+            });
+
+            $('#decryptForm').submit(function (e) {
+                e.preventDefault();
+                var encryptedText = $('#decryptText').val();
+                var iv = $('#decryptIV').val();
+                var key = $('#decryptKey').val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("Decrypt", "AES")',
+                    data: { encryptedText: encryptedText, iv: iv, key: key },
+                    success: function (response) {
+                        if (response.success) {
+                            $('#decryptedText').val(response.decryptedText);
+                            $('#decryptResult').show();
+                        } else {
+                            alert('Hata: ' + response.message);
+                        }
+                    },
+                    error: function () {
+                        alert('Bir hata oluştu.');
+                    }
+                });
+            });
+        });
+    </script>
+}
