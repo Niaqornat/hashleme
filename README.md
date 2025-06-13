@@ -3,7 +3,19 @@
 
 ---
 
-## 🏠 Ana Sayfa
+## İçindekiler
+
+- [Ana Sayfa](#ana-sayfa)
+- [AES Şifreleme / Şifre Çözme](#aes-şifreleme--şifre-çözme)
+- [SHA-256 Metin Özeti Oluşturma](#sha-256-metin-özeti-oluşturma)
+- [SHA-256 Metin Özeti Doğrulama](#sha-256-metin-özeti-doğrulama)
+- [SHA-256 Dosya Özeti Alma](#sha-256-dosya-özeti-alma)
+- [SHA-256 Dosya Özeti Doğrulama](#sha-256-dosya-özeti-doğrulama)
+- [İletişim](#iletişim)
+
+
+## 🏠 Ana Sayfa <a id="ana-sayfa"></a>
+
 
 ![Ana Sayfa](https://github.com/user-attachments/assets/c657ff6c-40d5-4f84-85d9-b72799321767)
 
@@ -11,7 +23,8 @@ Uygulamanın ana ekranı.
 
 ---
 
-## 🔒 AES Şifreleme / Şifre Çözme
+## 🔒 AES Şifreleme / Şifre Çözme <a id="aes-şifreleme--şifre-çözme"></a>
+
 
 ![AES Şifreleme](https://github.com/user-attachments/assets/b8d547e8-0f18-4e1b-aa78-3d6f7d0d8219)
 
@@ -22,7 +35,7 @@ Uygulamanın ana ekranı.
 
 ---
 
-## 🧾 SHA-256 Metin Özeti Oluşturma
+## 🧾 SHA-256 Metin Özeti Oluşturma <a id ="sha-256-metin-özeti-oluşturma"></a>
 
 ![SHA-256 Şifreleme](https://github.com/user-attachments/assets/ac2d69c9-2298-4d1c-82e2-e33a92fcb610)
 
@@ -31,7 +44,8 @@ Uygulamanın ana ekranı.
 
 ---
 
-## ✅ SHA-256 Metin Özeti Doğrulama
+## ✅ SHA-256 Metin Özeti Doğrulama <a id ="sha-256-metin-özeti-doğrulama"></a>
+
 
 
 ![SHA-256 Doğrulama](https://github.com/user-attachments/assets/d635c57e-0e00-4bc6-90c9-a1306e4c2270)
@@ -41,7 +55,7 @@ Uygulamanın ana ekranı.
 
 ---
 
-## 📁 SHA-256 Dosya Özeti Alma
+## 📁 SHA-256 Dosya Özeti Alma <a id ="ssha-256-dosya-özeti-alma"></a>
 
 ![Dosya Özeti 1](https://github.com/user-attachments/assets/707a4af6-81d5-49c2-b79b-7dea410d9469)
 
@@ -55,7 +69,7 @@ Uygulamanın ana ekranı.
 
 ---
 
-## ✔️ SHA-256 Dosya Özeti Doğrulama
+## ✔️ SHA-256 Dosya Özeti Doğrulama <a id ="sha-256-dosya-özeti-doğrulama"></a>
 
 
 ![Dosya Doğrulama](https://github.com/user-attachments/assets/243843fa-9e85-43be-aace-753f5b7e76ef)
@@ -66,7 +80,7 @@ Uygulamanın ana ekranı.
 
 ---
 
-## 📬 İletişim
+## 📬 İletişim <a id ="iletişim"></a>
 
 
 📧 **E-posta:** [batuhancetin@tutamail.com](mailto:batuhancetin@tutamail.com)
